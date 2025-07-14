@@ -121,10 +121,10 @@ func race(car1: Car, car2: Car) -> Car {
 
 // Пункт 5
 func competition() {
-let cars = Car.createCars()
-var shuffledCars = cars.shuffled()
-var winners: [Car] = []
-
+    let cars = Car.createCars()
+    var shuffledCars = cars.shuffled()
+    var winners: [Car] = []
+    
     for i in stride(from: 0, to: cars.count - 1, by: 2) {
         let car1 = shuffledCars[i]
         let car2 = shuffledCars[i+1]
@@ -138,7 +138,7 @@ var winners: [Car] = []
         print("ПОБЕДИТЕЛЬ: \(winner.brand) \(winner.model) с мощностью \(winner.enginePower) л.с.")
     }
     
-var overallWinner = winners[0]
+    var overallWinner = winners[0]
     for i in 1..<winners.count {
         overallWinner = race(car1: overallWinner, car2: winners[i])
     }
