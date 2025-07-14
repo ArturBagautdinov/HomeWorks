@@ -122,30 +122,33 @@ func race(car1: Car, car2: Car) -> Car {
 // Пункт 5
 func competition() {
     let cars = Car.createCars()
-    var shuffledCars = cars.shuffled()
-    var winners: [Car] = []
+    let shuffledCars = cars.shuffled()
+    var overallWinner: Car?
     
-    for i in stride(from: 0, to: cars.count - 1, by: 2) {
+    for i in stride(from: 0, to: cars.count-1, by: 2) {
         let car1 = shuffledCars[i]
         let car2 = shuffledCars[i+1]
         
-        print("Гонка #\(i/2+1) между авто:")
+        print("\nГонка #\(i/2+1) между авто:")
         car1.printCarInfo()
         car2.printCarInfo()
         
         let winner = race(car1: car1, car2: car2)
-        winners.append(winner)
-        print("ПОБЕДИТЕЛЬ: \(winner.brand) \(winner.model) с мощностью \(winner.enginePower) л.с.")
+        
+        if let currentWinner = overallWinner {
+            overallWinner = race(car1: currentWinner, car2: winner)
+        } else {
+            overallWinner = winner
+        }
+        
+        print ("ПОБЕДИТЕЛЬ: \(winner.brand) \(winner.model) с мощностью \(winner.enginePower) л.с.")
+        
     }
     
-    var overallWinner = winners[0]
-    for i in 1..<winners.count {
-        overallWinner = race(car1: overallWinner, car2: winners[i])
-    }
     print("--------------------")
-    print("ОБЩИЙ ПОБЕДИТЕЛЬ: \(overallWinner.brand) \(overallWinner.model) с мошностью \(overallWinner.enginePower) л.с.")
-    
-    
+    if let overallWinner {
+        print ("ОБЩИЙ ПОБЕДИТЕЛЬ: \(overallWinner.brand) \(overallWinner.model) c мошностью \(overallWinner.enginePower) л.с.")
+    }
 }
 @main
 struct App {
