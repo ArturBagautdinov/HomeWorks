@@ -129,7 +129,7 @@ var winners: [Car] = []
         let car1 = shuffledCars[i]
         let car2 = shuffledCars[i+1]
         
-        print("\nГонка #\(i/2+1) между авто:")
+        print("Гонка #\(i/2+1) между авто:")
         car1.printCarInfo()
         car2.printCarInfo()
         
@@ -139,10 +139,8 @@ var winners: [Car] = []
     }
     
 var overallWinner = winners[0]
-    for i in stride(from: 1, to: winners.count, by: 1) {
-        if overallWinner.enginePower < winners[i].enginePower {
-            overallWinner = winners[i]
-        }
+    for i in 1..<winners.count {
+        overallWinner = race(car1: overallWinner, car2: winners[i])
     }
     print("--------------------")
     print("ОБЩИЙ ПОБЕДИТЕЛЬ: \(overallWinner.brand) \(overallWinner.model) с мошностью \(overallWinner.enginePower) л.с.")
