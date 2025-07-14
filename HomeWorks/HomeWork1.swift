@@ -149,8 +149,9 @@ var overallWinner = winners[0]
     
     
 }
-
-competition()
-
-
-
+@main
+struct App {
+    static func main() {
+        competition()
+    }
+}
